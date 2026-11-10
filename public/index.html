@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indie Metadata Kit</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">&#9835;</span>
+      <div>
+        <h1>Indie Metadata Kit</h1>
+        <p>Release metadata, sorted &mdash; for artists just getting started.</p>
+      </div>
+    </div>
+    <button id="newReleaseBtn" class="btn btn-primary">+ New Release</button>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Your Releases</h2>
+      <ul id="releaseList" class="release-list"></ul>
+    </aside>
+
+    <main class="main">
+      <section id="emptyState" class="empty-state">
+        <h2>No release selected</h2>
+        <p>Pick a release on the left, or create a new one to start filling out its metadata.</p>
+      </section>
+
+      <form id="releaseForm" class="release-form" hidden>
+        <div class="form-header">
+          <h2 id="formTitle">Release</h2>
+          <div class="form-actions">
+            <button type="button" id="exportJsonBtn" class="btn">Download JSON</button>
+            <button type="button" id="exportCsvBtn" class="btn">Download CSV</button>
+            <button type="button" id="copyEpkBtn" class="btn">Copy EPK Text</button>
+            <button type="button" id="deleteBtn" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+
+        <fieldset>
+          <legend>The basics <span class="help-toggle" data-help="basics">?</span></legend>
+          <p class="help-text" data-help-text="basics">These are the core facts every streaming service (Spotify, Apple Music, etc.) needs about your release.</p>
+          <div class="grid-2">
+            <label>Release title
+              <input name="title" required placeholder="e.g. Sin Estres">
+            </label>
+            <label>Primary artist name
+              <input name="artist" required placeholder="Exactly as it should appear everywhere">
+            </label>
+            <label>Featured artist(s)
+              <input name="featuredArtists" placeholder="Optional, comma separated">
+            </label>
+            <label>Release type
+              <select name="releaseType">
+                <option>Single</option>
+                <option>EP</option>
+                <option>Album</option>
+              </select>
+            </label>
+            <label>Release date
+              <input name="releaseDate" type="date">
+            </label>
+            <label>Label
+              <input name="label" placeholder="Independent">
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Discovery &amp; genre <span class="help-toggle" data-help="genre">?</span></legend>
+          <p class="help-text" data-help-text="genre">Genre and mood tags are how playlists, algorithms, and curators find you. Pick what fans would search for, not just what sounds impressive.</p>
+          <div class="grid-2">
+            <label>Primary genre
+              <input name="genre" placeholder="e.g. Hip-Hop/Rap">
+            </label>
+            <label>Secondary genre
+              <input name="secondaryGenre" placeholder="Optional">
+            </label>
+            <label class="span-2">Mood / tags
+              <input name="moodTags" placeholder="comma, separated, tags">
+            </label>
+            <label>Language of lyrics
+              <input name="language" placeholder="e.g. English">
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" name="explicit">
+              Explicit content
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Rights &amp; identifiers <span class="help-toggle" data-help="rights">?</span></legend>
+          <p class="help-text" data-help-text="rights">
+            <strong>UPC/EAN</strong> identifies the whole release; your distributor usually assigns one for free.
+            <strong>ISRC</strong> identifies each individual track and is how streams get tracked back to you &mdash; also usually assigned by your distributor, but worth recording here once you have it.
+            The <strong>&copy; line</strong> covers the sound recording; the <strong>&#8471; line</strong> covers the composition/publishing.
+          </p>
+          <div class="grid-2">
+            <label>UPC / EAN
+              <input name="upc" placeholder="Leave blank if not assigned yet">
+            </label>
+            <label>Copyright line (&copy;)
+              <input name="copyrightLine" placeholder="e.g. 2026 Your Name">
+            </label>
+            <label>Publishing line (&#8471;)
+              <input name="publishingLine" placeholder="e.g. 2026 Your Name">
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Cover art</legend>
+          <div class="cover-row">
+            <img id="coverPreview" class="cover-preview" alt="Cover art preview" hidden>
+            <div>
+              <input type="file" id="coverInput" accept="image/*">
+              <input type="hidden" name="coverUrl">
+              <p class="hint">Square image, at least 3000&times;3000px recommended for DSP review.</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Tracklist &amp; credits <span class="help-toggle" data-help="tracks">?</span></legend>
+          <p class="help-text" data-help-text="tracks">List every track with writer/producer/performer credits &mdash; this is what you'll need for royalty splits and PRO registration later, so get it right from day one.</p>
+          <div class="track-rows-scroll">
+            <div id="trackRows" class="track-rows"></div>
+          </div>
+          <button type="button" id="addTrackBtn" class="btn">+ Add Track</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>Bio &amp; pitch <span class="help-toggle" data-help="bio">?</span></legend>
+          <p class="help-text" data-help-text="bio">A short bio and a one-line pitch make it far easier for blogs, playlist curators, and radio to cover you. Keep the pitch to 1-2 sentences.</p>
+          <label>Artist / release bio
+            <textarea name="bio" rows="4" placeholder="A few sentences about you and this release"></textarea>
+          </label>
+          <label>Playlist / press pitch
+            <textarea name="pitch" rows="2" placeholder="One or two sentences a curator could paste into a submission form"></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Links &amp; contact</legend>
+          <div class="grid-2">
+            <label>Website <input name="links.website" placeholder="https://"></label>
+            <label>Instagram <input name="links.instagram" placeholder="https://instagram.com/"></label>
+            <label>TikTok <input name="links.tiktok" placeholder="https://tiktok.com/@"></label>
+            <label>Twitter / X <input name="links.twitter" placeholder="https://x.com/"></label>
+            <label>Spotify artist profile <input name="links.spotify" placeholder="https://open.spotify.com/artist/"></label>
+            <label>Apple Music artist profile <input name="links.appleMusic" placeholder="https://music.apple.com/artist/"></label>
+            <label>Contact email <input name="contactEmail" type="email" placeholder="booking@"></label>
+          </div>
+        </fieldset>
+
+        <div class="form-footer">
+          <button type="submit" class="btn btn-primary">Save Release</button>
+          <span id="saveStatus" class="save-status"></span>
+        </div>
+      </form>
+    </main>
+  </div>
+</div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

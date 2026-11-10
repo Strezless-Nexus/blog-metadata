@@ -1,0 +1,45 @@
+[
+  {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "title": "Sin Estres",
+    "artist": "Taktsubo Cardiomyopathy",
+    "featuredArtists": "",
+    "releaseType": "Single",
+    "genre": "Hip-Hop/Rap",
+    "secondaryGenre": "Lo-Fi",
+    "moodTags": "chill, introspective, late-night",
+    "releaseDate": "2026-01-01",
+    "label": "Independent",
+    "upc": "",
+    "copyrightLine": "2026 Taktsubo Cardiomyopathy",
+    "publishingLine": "2026 Taktsubo Cardiomyopathy",
+    "language": "Spanish/English",
+    "explicit": false,
+    "coverUrl": "/uploads/sin-estres-cover.png",
+    "bio": "Taktsubo Cardiomyopathy is an independent artist making lo-fi, late-night tracks about taking it easy when everything else won't. \"Sin Estres\" (\"Without Stress\") is the debut single.",
+    "pitch": "Debut single \"Sin Estres\" blends laid-back lo-fi production with bilingual verses about letting go of stress — perfect for chill/lo-fi and bedroom-pop playlists.",
+    "links": {
+      "website": "",
+      "instagram": "",
+      "tiktok": "",
+      "twitter": "",
+      "spotify": "",
+      "appleMusic": ""
+    },
+    "contactEmail": "",
+    "tracks": [
+      {
+        "trackNumber": 1,
+        "title": "Sin Estres",
+        "duration": "",
+        "isrc": "",
+        "songwriters": "Taktsubo Cardiomyopathy",
+        "producers": "Taktsubo Cardiomyopathy",
+        "performers": "Taktsubo Cardiomyopathy",
+        "explicit": false
+      }
+    ],
+    "createdAt": "2026-11-10T00:00:00.000Z",
+    "updatedAt": "2026-11-10T00:00:00.000Z"
+  }
+]
