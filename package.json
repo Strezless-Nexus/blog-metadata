@@ -1,0 +1,14 @@
+{
+  "name": "indie-metadata-kit",
+  "version": "1.0.0",
+  "description": "Release metadata manager for indie artists just starting their music career",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^2.0.0"
+  }
+}
